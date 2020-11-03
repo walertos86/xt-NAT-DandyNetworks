@@ -774,7 +774,7 @@ struct nat_htable_ent *create_nat_session(
         return NULL;
     }
 
-	nataddr_id = get_nataddr_id(nataddr)
+	nataddr_id = get_nataddr_id(nataddr);
     //nataddr_id = ntohl(nataddr) - ntohl(nat_pool_start);
 
     //printk(KERN_DEBUG "xt_NAT create_nat_session: nataddr_id = %u (%u - %u)\n", nataddr_id, ntohl(nataddr), ntohl(nat_pool_start));
@@ -1956,8 +1956,8 @@ static int __init nat_tg_init(void)
 	}
 
 
-	nat_pool_start = kzalloc(num_of_nat_pools*sizeof(u_int32_t))
-	nat_pool_end   = kzalloc(num_of_nat_pools*sizeof(u_int32_t))
+	nat_pool_start = kzalloc(num_of_nat_pools * sizeof(u_int32_t), GFP_KERNEL);
+	nat_pool_end = kzalloc(num_of_nat_pools * sizeof(u_int32_t), GFP_KERNEL);
 
 	// parse nat-pool's start and end IPs
 	do

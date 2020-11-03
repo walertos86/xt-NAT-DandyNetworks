@@ -1,0 +1,50 @@
+root@debian:/mahendra/xt_NAT# make
+make -C /lib/modules/4.9.0-12-amd64/build/ M=/mahendra/xt_NAT modules CONFIG_DEBUG_INFO=y
+make[1]: Entering directory '/usr/src/linux-headers-4.9.0-12-amd64'
+  CC [M]  /mahendra/xt_NAT/xt_NAT.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /mahendra/xt_NAT/xt_NAT.mod.o
+  LD [M]  /mahendra/xt_NAT/xt_NAT.ko
+make[1]: Leaving directory '/usr/src/linux-headers-4.9.0-12-amd64'
+sync
+gcc -O2 -Wall -Wunused -fPIC -o libxt_NAT_sh.o -c libxt_NAT.c
+gcc -shared -o libxt_NAT.so libxt_NAT_sh.o
+rm libxt_NAT_sh.o
+root@debian:/mahendra/xt_NAT# make install
+make -C /lib/modules/4.9.0-12-amd64/build/ M=/mahendra/xt_NAT modules_install INSTALL_MOD_PATH=
+make[1]: Entering directory '/usr/src/linux-headers-4.9.0-12-amd64'
+  INSTALL /mahendra/xt_NAT/xt_NAT.ko
+  DEPMOD  4.9.0-12-amd64
+make[1]: Leaving directory '/usr/src/linux-headers-4.9.0-12-amd64'
+install -D libxt_NAT.so /usr/lib/x86_64-linux-gnu/xtables/libxt_NAT.so
+
+
+---- errors
+
+root@debian:/mahendra/xt-NAT-DandyNetworks-master# make
+make -C /lib/modules/4.9.0-12-amd64/build/ M=/mahendra/xt-NAT-DandyNetworks-master modules CONFIG_DEBUG_INFO=y
+make[1]: Entering directory '/usr/src/linux-headers-4.9.0-12-amd64'
+  CC [M]  /mahendra/xt-NAT-DandyNetworks-master/xt_NAT.o
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c: In function ‘create_nat_session’:
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:781:5: error: expected ‘;’ before ‘spin_lock_bh’
+     spin_lock_bh(&create_session_lock[nataddr_id]);
+     ^~~~~~~~~~~~
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c: In function ‘nat_tg_init’:
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:1959:19: error: too few arguments to function ‘kzalloc’
+  nat_pool_start = kzalloc(num_of_nat_pools*sizeof(u_int32_t))
+                   ^~~~~~~
+In file included from /usr/src/linux-headers-4.9.0-12-common/include/linux/textsearch.h:8:0,
+                 from /usr/src/linux-headers-4.9.0-12-common/include/linux/skbuff.h:30,
+                 from /mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:3:
+/usr/src/linux-headers-4.9.0-12-common/include/linux/slab.h:634:21: note: declared here
+ static inline void *kzalloc(size_t size, gfp_t flags)
+                     ^~~~~~~
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:1960:2: error: expected ‘;’ before ‘nat_pool_end’
+  nat_pool_end   = kzalloc(num_of_nat_pools*sizeof(u_int32_t))
+  ^~~~~~~~~~~~
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:1948:15: warning: unused variable ‘k’ [-Wunused-variable]
+     int i=-1, k=0, j;
+               ^
+/mahendra/xt-NAT-DandyNetworks-master/xt_NAT.c:1947:10: warning: unused variable ‘buff’ [-Wunused-variable]
+     char buff[128] = { 0 };
