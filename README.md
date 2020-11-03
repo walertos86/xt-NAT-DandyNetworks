@@ -29,7 +29,7 @@ $ sudo depmod -a
 ### NAT functionality
 * Define NAT Pool for the xt_NAT module:
 ```
-$ sudo modprobe xt_NAT nat_pool=<Start IP>-<End IP>
+$ sudo modprobe xt_NAT nat_pool=<Start IP-1>-<End IP-1> <Start IP-2>-<End IP-2> <Start IP-3>-<End IP-3> .. <Start IP-n>-<End IP-n>
 ```
 * Disable conntrack for the traffic that handled by the xt_NAT module:
 ```
@@ -48,7 +48,7 @@ $ sudo iptables -A FORWARD -s <Users Net> -i <Downlink iface> -o <Uplink iface> 
 ### NAT Events Export
 Just add ``nf_dest`` option with a list of the Netflow v5 collectors to the xt_NAT module parameters:
 ```
-$ sudo modprobe xt_NAT nat_pool=<Start IP>-<End IP> nf_dest=127.0.0.1:2055
+$ sudo modprobe xt_NAT nat_pool=<Start IP-1>-<End IP-1> <Start IP-2>-<End IP-2> <Start IP-3>-<End IP-3> .. <Start IP-n>-<End IP-n>  nf_dest=127.0.0.1:2055
 ```
 ## NAT Statistics
 NAT statistics are available via the ```/proc/net/NAT/*``` directory:
