@@ -2,6 +2,8 @@
 ## Description
 This Full Cone NAT xtables module was developed as a replace for the conntrack NAT to provide Assymetric NAT features on Linux systems that can be used as a Carrier Grade NAT in small ISP networks.
 
+## This extends the cloned one to assign ip addresses randomly from the given pool range, instead of manually doing it. It was freelance work for Dandy Networks for which owner is yet to release the agreed payment amount. 
+
 It allows to have 40Gbps NAT on commodity servers like 2*Xeon E5-2698 v3 @ 2.30GHz (2 x 16 Cores) with Intel X710/XL710/X540 10G adapters.
 
 Compatibility tested with Linux Kernel 3.18 and 4.1
