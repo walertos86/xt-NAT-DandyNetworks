@@ -136,14 +136,14 @@ static char *print_sockaddr(const struct sockaddr_storage *ss)
 static inline long timer_end(struct timespec start_time)
 {
     struct timespec end_time;
-    getrawmonotonic(&end_time);
+    ktime_get_raw_ts64(&end_time);
     return(end_time.tv_nsec - start_time.tv_nsec);
 }
 
 static inline struct timespec timer_start(void)
 {
     struct timespec start_time;
-    getrawmonotonic(&start_time);
+    ktime_get_raw_ts64(&start_time);
     return start_time;
 }
 
